@@ -6,6 +6,8 @@ const gameboard = () => {
     return board;
   }
 
+  const ships = [];
+
   const board = createBoard();
 
   const showBoard = () => board;
@@ -16,6 +18,8 @@ const gameboard = () => {
     const columnStart = ship.start[1];
     const columnEnd = ship.end[1];
     const {length} = ship;
+
+    ships.push(ship);
     // horizontal
     if (rowStart === rowEnd) {
       for (let i=columnStart; i < columnStart+length; i++) {
@@ -32,6 +36,10 @@ const gameboard = () => {
 
   const guessed = [];
 
+  function allSunk() {
+    return ships.every(ship => ship.isSunk());
+  }
+
   const receiveAttack = (location) => {
     const row = location[0];
     const column = location[1];
@@ -45,6 +53,9 @@ const gameboard = () => {
     if (typeof board[row][column] === "object") {
       board[row][column].hit();
       guessed.push([row,column]);
+      if (allSunk()) {
+        return "Game Over!";
+      }
     } else {
       // ship has not been hit
       board[row][column] = "miss";

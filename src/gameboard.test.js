@@ -3,6 +3,8 @@ import Ship from "./ship";
 
 const vertShip = new Ship(3, [1,1], [3,1]);
 const horizShip = new Ship(4, [0,0], [0,3]);
+const oneShip = new Ship(1, [4,4], [4,4]);
+const twoShip = new Ship(2, [6,6], [6,7]);
 
 let board;
 
@@ -28,7 +30,6 @@ test('ship placed correctly vertically', () => {
 });
 
 test('receive attack hits ship', () => {
-  const oneShip = new Ship(1, [4,4], [4,4]);
   board.placeShip(oneShip);
   board.receiveAttack([4,4]);
   expect(oneShip.isSunk()).toBeTruthy;
@@ -44,4 +45,15 @@ test('records misses', () => {
   board.placeShip(horizShip);
   board.receiveAttack([6,7]);
   expect(board.showBoard()[6][7]).toEqual("miss");
+});
+
+test('checks if all ships are sunk', () => {
+  board.placeShip(oneShip);
+  expect(board.receiveAttack([4,4])).toEqual('Game Over!');
+});
+
+test('continues game if not all ships are sunk', () => {
+  board.placeShip(oneShip);
+  board.placeShip(twoShip);
+  expect(board.receiveAttack([4,4])).not.toEqual('Game Over!');
 });
