@@ -28,18 +28,31 @@ const gameboard = () => {
         board[i][columnStart] = ship;
       }
     }
+  }
 
-    const receiveAttack = (location) => {
-      // take pair of coordinates
-      // determines if they attack a ship
-      // if they do attack a ship, then send the hit function to the
-      // correct ship
-      // if they do not attack a ship, record the coordinates of the
-      // missed shot
+  const guessed = [];
+
+  const receiveAttack = (location) => {
+    const row = location[0];
+    const column = location[1];
+
+    // already guessed
+    if (guessed.some(a => location.every((v,i) => v === a[i]))) {
+      return "Already guessed. Please try again.";
+    }
+
+    // ship has been hit
+    if (typeof board[row][column] === "object") {
+      board[row][column].hit();
+      guessed.push([row,column]);
+    } else {
+      // ship has not been hit
+      board[row][column] = "miss";
+      guessed.push([row,column]);
     }
   }
 
-  return {showBoard, placeShip}
+  return {showBoard, placeShip, receiveAttack}
 }
 
 export default gameboard;
