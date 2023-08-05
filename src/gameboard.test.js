@@ -31,29 +31,30 @@ test('ship placed correctly vertically', () => {
 
 test('receive attack hits ship', () => {
   board.placeShip(oneShip);
-  board.receiveAttack([4,4]);
+  board.receiveAttack(4,4);
   expect(oneShip.isSunk()).toBeTruthy;
+  expect(board.showBoard()[4][4]).toBe("hit");
 });
 
 test('cannot guess the same place twice', () => {
-  board.receiveAttack([2,2]);
-  board.receiveAttack([2,3]);
-  expect(board.receiveAttack([2,2])).toEqual('Already guessed. Please try again.');
+  board.receiveAttack(2,2);
+  board.receiveAttack(2,3);
+  expect(board.receiveAttack(2,2)).toEqual('Already guessed. Please try again.');
 });
 
 test('records misses', () => {
   board.placeShip(horizShip);
-  board.receiveAttack([6,7]);
+  board.receiveAttack(6,7);
   expect(board.showBoard()[6][7]).toEqual("miss");
 });
 
 test('checks if all ships are sunk', () => {
   board.placeShip(oneShip);
-  expect(board.receiveAttack([4,4])).toEqual('Game Over!');
+  expect(board.receiveAttack(4,4)).toEqual('Game Over!');
 });
 
 test('continues game if not all ships are sunk', () => {
   board.placeShip(oneShip);
   board.placeShip(twoShip);
-  expect(board.receiveAttack([4,4])).not.toEqual('Game Over!');
+  expect(board.receiveAttack(4,4)).not.toEqual('Game Over!');
 });

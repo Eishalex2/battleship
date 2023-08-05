@@ -1,5 +1,3 @@
-import Ship from "./ship";
-
 const gameboard = () => {
   const createBoard = () => {
     const board = [...Array(10)].map(() => Array(10).fill(""));
@@ -34,32 +32,27 @@ const gameboard = () => {
     }
   }
 
-  const guessed = [];
-
   function allSunk() {
     return ships.every(ship => ship.isSunk());
   }
 
-  const receiveAttack = (location) => {
-    const row = location[0];
-    const column = location[1];
-
+  const receiveAttack = (row, column) => {
+    const boardCell = board[row][column];
     // already guessed
-    if (guessed.some(a => location.every((v,i) => v === a[i]))) {
+    if (boardCell === "miss" || boardCell === "hit") {
       return "Already guessed. Please try again.";
     }
 
     // ship has been hit
     if (typeof board[row][column] === "object") {
       board[row][column].hit();
-      guessed.push([row,column]);
+      board[row][column] = "hit";
       if (allSunk()) {
         return "Game Over!";
       }
     } else {
       // ship has not been hit
       board[row][column] = "miss";
-      guessed.push([row,column]);
     }
   }
 
