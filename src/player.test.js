@@ -6,9 +6,7 @@ const oneShip = new Ship(1, [6,6], [6,6]);
 
 describe('Player moves', () => {
   const player = Player();
-  const playerBoard = gameboard();
 
-  const computer = Player();
   const computerBoard = gameboard();
 
   test('Player misses', () => {
@@ -27,3 +25,14 @@ describe('Player moves', () => {
     expect(player.attack(1,1,computerBoard)).toBe('Already guessed. Please try again.');
   });
 });
+
+describe('Computer moves', () => {
+  const computer = Player();
+
+  const playerBoard = gameboard();
+
+  test('Computer misses', () => {
+    computer.randomAttack(playerBoard);
+    expect(playerBoard.showBoard().flat().every(entry => entry === "")).toBeFalsy;
+  })
+})

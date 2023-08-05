@@ -32,7 +32,7 @@ test('ship placed correctly vertically', () => {
 test('receive attack hits ship', () => {
   board.placeShip(oneShip);
   board.receiveAttack(4,4);
-  expect(oneShip.isSunk()).toBeTruthy;
+  expect(oneShip.isSunk()).toBeTruthy();
   expect(board.showBoard()[4][4]).toBe("hit");
 });
 

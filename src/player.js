@@ -1,4 +1,4 @@
-import gameboard from "./gameboard";
+
 // turns
 // two gameboards, two already guessed arrays
 // computer ai to play against
@@ -14,7 +14,7 @@ const Player = () => {
       const row = Math.floor(Math.random() * 10);
       const column = Math.floor(Math.random() * 10);
 
-      const boardCell = board[row][column];
+      const boardCell = board.showBoard()[row][column];
 
       if (boardCell === 'miss' || boardCell === 'hit') {
         chooseRandomCoord();
@@ -22,7 +22,8 @@ const Player = () => {
         board.receiveAttack(row, column);
       }
     }
-    return {chooseRandomCoord}
+    
+    chooseRandomCoord();
   }
 
   return {attack, randomAttack}
