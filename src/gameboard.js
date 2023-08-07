@@ -15,11 +15,11 @@ const gameboard = () => {
 
   const showBoard = () => board;
 
-  const placeShip = (ship) => {
-    const rowStart = ship.start[0];
-    const rowEnd = ship.end[0];
-    const columnStart = ship.start[1];
-    const columnEnd = ship.end[1];
+  const placeShip = (ship, start, end) => {
+    const rowStart = start[0];
+    const rowEnd = end[0];
+    const columnStart = start[1];
+    const columnEnd = end[1];
     const {length} = ship;
 
     ships.push(ship);

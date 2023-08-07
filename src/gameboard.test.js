@@ -1,9 +1,9 @@
 import gameboard from "./gameboard";
 import Ship from "./ship";
 
-const vertShip = new Ship(3, [0,0], [2,0]);
-const horizShip = new Ship(2, [1,2], [1,3]);
-const oneShip = new Ship(1, [4,4], [4,4]);
+const vertShip = new Ship(3);
+const horizShip = new Ship(2);
+const oneShip = new Ship(1);
 
 let board;
 
@@ -12,14 +12,14 @@ beforeEach(() => {
 });
 
 test('ship placed correctly horizontally', () => {
-  board.placeShip(horizShip);
+  board.placeShip(horizShip, [1,2], [1,3]);
   expect(board.showBoard()[1][2]).toBe(horizShip);
   expect(board.showBoard()[1][3]).toBe(horizShip);
   expect(board.showBoard()[0][4]).toBe("");
 });
 
 test('ship placed correctly vertically', () => {
-  board.placeShip(vertShip);
+  board.placeShip(vertShip, [0,0], [2,0]);
   expect(board.showBoard()[0][0]).toBe(vertShip);
   expect(board.showBoard()[1][0]).toBe(vertShip);
   expect(board.showBoard()[2][0]).toBe(vertShip);
@@ -27,7 +27,7 @@ test('ship placed correctly vertically', () => {
 });
 
 test('receive attack hits ship', () => {
-  board.placeShip(oneShip);
+  board.placeShip(oneShip, [4,4], [4,4]);
   board.receiveAttack(4,4);
   expect(oneShip.isSunk()).toBeTruthy();
   expect(board.showBoard()[4][4]).toBe("hit");
@@ -40,18 +40,18 @@ test('cannot guess the same place twice', () => {
 });
 
 test('records misses', () => {
-  board.placeShip(horizShip);
+  board.placeShip(horizShip, [1,2], [1,3]);
   board.receiveAttack(6,7);
   expect(board.showBoard()[6][7]).toEqual("miss");
 });
 
 test('checks if all ships are sunk', () => {
-  board.placeShip(oneShip);
+  board.placeShip(oneShip, [4,4], [4,4]);
   expect(board.receiveAttack(4,4)).toEqual('Game Over!');
 });
 
 test('continues game if not all ships are sunk', () => {
-  board.placeShip(oneShip);
-  board.placeShip(horizShip);
+  board.placeShip(oneShip, [4,4], [4,4]);
+  board.placeShip(horizShip, [1,2], [1,3]);
   expect(board.receiveAttack(4,4)).not.toEqual('Game Over!');
 });
