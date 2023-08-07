@@ -33,6 +33,6 @@ describe('Computer moves', () => {
 
   test('Computer misses', () => {
     computer.randomAttack(playerBoard);
-    expect(playerBoard.showBoard().flat().every(entry => entry === "")).toBeFalsy;
+    expect(playerBoard.showBoard().flat().every(entry => entry === "")).toBeFalsy();
   })
 })

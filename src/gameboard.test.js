@@ -1,10 +1,9 @@
 import gameboard from "./gameboard";
 import Ship from "./ship";
 
-const vertShip = new Ship(3, [1,1], [3,1]);
-const horizShip = new Ship(4, [0,0], [0,3]);
+const vertShip = new Ship(3, [0,0], [2,0]);
+const horizShip = new Ship(2, [1,2], [1,3]);
 const oneShip = new Ship(1, [4,4], [4,4]);
-const twoShip = new Ship(2, [6,6], [6,7]);
 
 let board;
 
@@ -14,18 +13,16 @@ beforeEach(() => {
 
 test('ship placed correctly horizontally', () => {
   board.placeShip(horizShip);
-  expect(board.showBoard()[0][0]).toBe(horizShip);
-  expect(board.showBoard()[0][1]).toBe(horizShip);
-  expect(board.showBoard()[0][2]).toBe(horizShip);
-  expect(board.showBoard()[0][3]).toBe(horizShip);
+  expect(board.showBoard()[1][2]).toBe(horizShip);
+  expect(board.showBoard()[1][3]).toBe(horizShip);
   expect(board.showBoard()[0][4]).toBe("");
 });
 
 test('ship placed correctly vertically', () => {
   board.placeShip(vertShip);
-  expect(board.showBoard()[1][1]).toBe(vertShip);
-  expect(board.showBoard()[2][1]).toBe(vertShip);
-  expect(board.showBoard()[3][1]).toBe(vertShip);
+  expect(board.showBoard()[0][0]).toBe(vertShip);
+  expect(board.showBoard()[1][0]).toBe(vertShip);
+  expect(board.showBoard()[2][0]).toBe(vertShip);
   expect(board.showBoard()[3][0]).toBe("");
 });
 
@@ -55,6 +52,6 @@ test('checks if all ships are sunk', () => {
 
 test('continues game if not all ships are sunk', () => {
   board.placeShip(oneShip);
-  board.placeShip(twoShip);
+  board.placeShip(horizShip);
   expect(board.receiveAttack(4,4)).not.toEqual('Game Over!');
 });

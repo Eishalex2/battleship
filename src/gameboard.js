@@ -4,6 +4,11 @@ const gameboard = () => {
     return board;
   }
 
+  const clearBoard = () => {
+    const board = [...Array(10)].map(() => Array(10).fill(""));
+    return board;
+  }
+
   const ships = [];
 
   const board = createBoard();
@@ -56,7 +61,7 @@ const gameboard = () => {
     }
   }
 
-  return {showBoard, placeShip, receiveAttack}
+  return {clearBoard, showBoard, placeShip, receiveAttack}
 }
 
 export default gameboard;

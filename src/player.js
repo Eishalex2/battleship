@@ -1,10 +1,3 @@
-
-// turns
-// two gameboards, two already guessed arrays
-// computer ai to play against
-
-// maybe just focus on making the computer ai first and go from there.
-
 const Player = () => {
 
   const attack = (row, column, board) => board.receiveAttack(row, column)
