@@ -1,59 +1,36 @@
-const path = require("path");
+const path = require('path');
 
 module.exports = {
-  mode: "development",
-  entry: "./src/index.js",
-  output: {
-    filename: "main.js",
-    path: path.resolve(__dirname, "dist"),
-  },
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        exclude: ['node_modules'],
-        use: ['babel-loader'],
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.gif$/,
-        type: 'asset/inline',
-      },
-      {
-        test: /\.(ttf|eot|svg)$/,
-        type: 'asset/resource',
-      },
-    ],
-  },
-  resolve: {
-    alias: {
-      config$: "./configs/app-config.js",
-      react: "./vendor/react-master",
+    mode: 'development',
+    entry: './src/index.js',
+    output: {
+        filename: 'main.js',
+        path: path.resolve(__dirname, 'dist'),
     },
-    extensions: [".js", ".jsx"],
-    modules: [
-      "node_modules",
-      "bower_components",
-      "shared",
-      "/shared/vendor/modules",
-    ],
-  },
-  "transform": {
-    "\\.[jt]sx?$": "babel-jest",
-    "\\.css$": "some-css-transformer",
-  },
-  modulePaths: ['/shared/vendor/modules'],
-  moduleFileExtensions: ['js', 'jsx'],
-  moduleDirectories: ['node_modules', 'bower_components', 'shared'],
+    devtool: 'inline-source-map',
+    module: {
+        rules: [
+            {
+                test: /\.js$/, // Transpile JavaScript files using Babel
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env'],
+                    },
+                },
+            },
+            {
+                test: /\.css$/, // Load CSS files
+                use: ['style-loader', 'css-loader'],
+            },
+            {
 
-  moduleNameMapper: {
-    '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
-    '\\.(gif|ttf|eot|svg)$': '<rootDir>/__mocks__/fileMock.js',
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
 
-    '^react(.*)$': '<rootDir>/vendor/react-master$1',
-    '^config$': '<rootDir>/configs/app-config.js',
-  },
+                type: 'asset/resource',
+
+            },
+        ],
+    },
 };
