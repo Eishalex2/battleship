@@ -1,6 +1,6 @@
-import Player from "./player";
-import gameboard from "./gameboard";
-import Ship from "./ship";
+import Player from "../player";
+import gameboard from "../gameboard";
+import Ship from "../ship";
 
 const oneShip = new Ship(1, [6,6], [6,6]);
 

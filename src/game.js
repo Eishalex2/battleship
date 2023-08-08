@@ -1,5 +1,5 @@
-import gameboard from "./gameboard";
-import Player from "./player";
+import gameboard from "./components/gameboard";
+import Player from "./components/player";
 import Ship from "./ship";
 
 // create players and gameboards

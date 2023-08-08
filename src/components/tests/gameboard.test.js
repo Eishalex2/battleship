@@ -1,5 +1,5 @@
-import gameboard from "./gameboard";
-import Ship from "./ship";
+import gameboard from "../gameboard";
+import Ship from "../ship";
 
 const vertShip = new Ship(3);
 const horizShip = new Ship(2);
