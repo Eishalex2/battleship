@@ -1,6 +1,17 @@
-#playerBoard, 
-#computerBoard {
+#board-container {
+  display: flex;
+  gap: 10%;
+}
+
+#player-board, 
+#computer-board {
+  width: 500px;
+  height: 500px;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
+  border: 0.5px solid black;
+}
+
+.cell {
   border: 0.5px solid black;
 }
