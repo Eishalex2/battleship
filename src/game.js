@@ -1,6 +1,7 @@
 import gameboard from "./components/gameboard";
 import Player from "./components/player";
-import Ship from "./ship";
+import Ship from "./components/ship";
+import createBoard from "./visibleBoard";
 
 // create players and gameboards
 
@@ -19,8 +20,7 @@ const availableShips = () => {
     destroyer
   }
 }
-
-const gameplay = () => {
+const game = () => {
   const player = Player();
   const playerBoard = gameboard();
 
@@ -32,6 +32,13 @@ const gameplay = () => {
     playerBoard.clearBoard();
     enemyBoard.clearBoard();
 
+    createBoard("player-board", playerBoard);
+    createBoard("computer-board", enemyBoard);    
+  }
 
+  return {
+    startGame
   }
 }
+
+export default game;
