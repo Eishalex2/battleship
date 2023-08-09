@@ -1,7 +1,7 @@
 import gameboard from "./components/gameboard";
 import Player from "./components/player";
 import Ship from "./components/ship";
-import createBoard from "./visibleBoard";
+import { createBoard, displayMoveResult } from "./visibleBoard";
 
 // create players and gameboards
 
@@ -36,8 +36,17 @@ const game = () => {
     createBoard("computer-board", enemyBoard);    
   }
 
+  const playerMove = (row, column) => {
+    player.attack(row, column, enemyBoard);
+    const isHit = enemyBoard.showBoard()[row][column] === 'hit';
+    displayMoveResult(row, column, 'computer-board', isHit);
+
+    // need to check if all ships are sunk
+  }
+
   return {
-    startGame
+    startGame,
+    playerMove
   }
 }
 
