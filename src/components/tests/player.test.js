@@ -2,7 +2,7 @@ import Player from "../player";
 import gameboard from "../gameboard";
 import Ship from "../ship";
 
-const oneShip = new Ship(1, [6,6], [6,6]);
+const oneShip = new Ship(1);
 
 describe('Player moves', () => {
   const player = Player();
@@ -15,7 +15,7 @@ describe('Player moves', () => {
   });
 
   test('Player hits', () => {
-    computerBoard.placeShip(oneShip);
+    computerBoard.placeShip(oneShip, [6,6], [6,6]);
     player.attack(6, 6, computerBoard);
     expect(computerBoard.showBoard()[6][6]).toBe("hit");
   });
