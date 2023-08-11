@@ -1,5 +1,3 @@
-import game from "./game";
+import addListeners from "./listeners";
 
-const myGame = game();
-
-myGame.startGame();
+addListeners();
