@@ -1,10 +1,15 @@
+body {
+  position: relative;
+}
+
 #board-container {
   display: flex;
   gap: 10%;
 }
 
 #player-board, 
-#computer-board {
+#computer-board,
+#place-ships-board {
   width: 500px;
   height: 500px;
   display: grid;
@@ -15,4 +20,22 @@
 
 .cell {
   border: 0.5px solid black;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+#place-ships-container {
+  position: fixed;
+  top: 10%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.ship {
+  background-color: orange;
 }
