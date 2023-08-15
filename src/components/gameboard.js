@@ -15,24 +15,19 @@ const gameboard = () => {
 
   const showBoard = () => board;
 
-  const placeShip = (ship, start, end) => {
-    const rowStart = start[0];
-    const rowEnd = end[0];
-    const columnStart = start[1];
-    const columnEnd = end[1];
-    const {length} = ship;
+  const placeShip = (ship, row, col, orientation) => {
+    if (board[row][col] !== ship) {
+      ships.push(ship);
+      board[row][col] = ship;
 
-    ships.push(ship);
-    // horizontal
-    if (rowStart === rowEnd) {
-      for (let i=columnStart; i < columnStart+length; i++) {
-        board[rowStart][i] = ship;
-      }
-    }
-    // vertical
-    else if (columnStart === columnEnd) {
-      for (let i = rowStart; i < rowStart + length; i++) {
-        board[i][columnStart] = ship;
+      if (orientation === 'horiz') {
+        for (let i = 1; i < ship.length; i++) {
+          board[row][col + i] = ship;
+        }
+      } else {
+        for (let i = 1; i < ship.length; i++) {
+          board[row + 1][col] = ship;
+        }
       }
     }
   }

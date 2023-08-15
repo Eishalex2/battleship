@@ -1,25 +1,26 @@
 import gameboard from "./components/gameboard";
 import Player from "./components/player";
 import Ship from "./components/ship";
-import { createBoard, displayMoveResult } from "./visibleBoard";
+import UI from "./visibleBoard";
 
 // create players and gameboards
 
-const availableShips = () => {
-  const carrier = new Ship(5);
-  const battleship = new Ship(4);
-  const cruiser = new Ship(3);
-  const submarine = new Ship(3);
-  const destroyer = new Ship(2);
+export default class Gameplay {
+  static player = Player();
 
-  return {
-    carrier,
-    battleship,
-    cruiser,
-    submarine,
-    destroyer
+  static playerBoard = gameboard();
+
+  static opponent = Player();
+
+  static computerBoard = gameboard();
+
+  static playerMove(row, column) {
+    this.player.attack(row, column, this.computerBoard);
+    const isHit = this.computerBoard.showBoard()[row][column] === 'hit';
+    UI.displayMoveResult(row, column, 'computer-board', isHit);
   }
 }
+
 const game = () => {
   const player = Player();
   const playerBoard = gameboard();
@@ -27,13 +28,11 @@ const game = () => {
   const opponent = Player();
   const enemyBoard = gameboard();
 
-  const startGame = () => {
+  const startGame = (ships) => {
     // reset
     playerBoard.clearBoard();
     enemyBoard.clearBoard();
-
-    createBoard("player-board", playerBoard);
-    createBoard("computer-board", enemyBoard);    
+    createBoard('place-ships-board', playerBoard);
   }
 
   const playerMove = (row, column) => {
@@ -57,5 +56,3 @@ const game = () => {
     computerMove
   }
 }
-
-export default game;

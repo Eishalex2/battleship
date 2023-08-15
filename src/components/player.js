@@ -2,6 +2,12 @@ const Player = () => {
 
   const attack = (row, column, board) => board.receiveAttack(row, column);
 
+  const placeShips = (shipsArray, board) => {
+    shipsArray.forEach((length) => {
+      board.placeShip(length);
+    })
+  }
+
   const chooseRandomCoord = (board) => {
     const row = Math.floor(Math.random() * 10);
     const column = Math.floor(Math.random() * 10);
@@ -15,7 +21,7 @@ const Player = () => {
     return [row, column];
   }
 
-  return {attack, chooseRandomCoord}
+  return {placeShips, attack, chooseRandomCoord}
 }
 
 export default Player;

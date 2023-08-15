@@ -1,3 +1,3 @@
-import addListeners from "./listeners";
+import Listeners from './listeners';
 
-addListeners();
+Listeners.eventListeners();
