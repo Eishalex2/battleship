@@ -37,7 +37,7 @@ export default class Listeners {
         const { row } = e.target.dataset;
         const { column } = e.target.dataset;
         const currentShip = this.ships[this.shipsIndex];
-        if (this.shipIndex < 5) {
+        if (this.shipIndex < 5 && this.isLegalShipPlacement(this.ships[this.shipIndex].length, row, column)) {
           this.placeShip(row, column);
         }
       });
@@ -49,74 +49,29 @@ export default class Listeners {
     this.shipsPlaced.push(this.ships[this.shipIndex]);
     this.shipIndex += 1;
   }
+
+  static isLegalShipPlacement(length, row, column) {
+    // check if any of the cells has a ship in it
+
+    // check if ship goes out of bounds
+    if (this.orientation === 'horiz') {
+      // check if ship goes out of bounds
+      if (Number(column) + length - 1 > 9) return false;
+      
+      // check if any of the target cells already has a ship in it
+      // false = no ship
+      let flag = false;
+      for (let i = Number(column); i < Number(column) + length; i++) {
+        if (!flag) {
+          flag = UI.containsShip(row, i);
+        }
+      }
+      return (!flag);
+    }
+    
+    // return (Number(column) + length - 1) < 10;
+    // if (this.orientation === 'vert') return (Number(column) + length - 1) < 10;
+
+    // check if any of the cells has a ship already in it
+  }
 }
-
-
-// function listeners() {
-//   const orientation = 'horiz';
-
-//   const availableShips = () => {
-//     const carrier = new Ship(5);
-//     const battleship = new Ship(4);
-//     const cruiser = new Ship(3);
-//     const submarine = new Ship(3);
-//     const destroyer = new Ship(2);
-  
-//     return [carrier, battleship, cruiser, submarine, destroyer]
-//   }
-
-//   let shipIndex = 0;
-
-//   const shipsPlaced = [];
-
-//   function addListeners() {
-//     createBoard('#place-ships-board');
-
-//     function placeShip(row, column) {
-//       placeShipVisible(availableShips()[shipIndex].length, row, column, orientation);
-//       shipsPlaced.push(availableShips()[shipIndex]);
-//       shipIndex += 1;
-//     }
-
-//     function addPlaceShipListeners() {
-//       document.querySelectorAll('#place-ships-board .cell').forEach((cell) => {
-//         cell.addEventListener('click', (e) => {
-//           const {row} = e.target.dataset;
-//           const {column} = e.target.dataset;
-//           const currentShip = availableShips()[shipIndex];
-//           if (shipIndex < 5) {
-//             placeShip(row, column);
-//           }
-//         });
-//       });
-//     }
-
-//     return {addPlaceShipListeners}
-//   }
-//   return {addListeners}
-// }
-
-
-
-// function addListeners() {
-// // start game
-//   const myGame = game();
-//   myGame.startGame();
-
-// // attack event listeners
-//   document.querySelectorAll('#computer-board .cell').forEach((cell) => {
-//     cell.addEventListener('click', (e) => {
-//       if (e.target.textContent === '') {
-//         myGame.playerMove(e.target.dataset.row, e.target.dataset.column);
-//       }
-//     });
-//   });
-// }
-
-// function controller() {
-//   const orientation = 'horiz';
-//   const shipLengths = [5, 4, 3, 3, 2];
-//   const shipsPlaced = [];
-
-
-// }

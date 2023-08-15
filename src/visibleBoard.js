@@ -30,7 +30,6 @@ export default class UI {
     cells.forEach((cell) => {
       if (cell.dataset.row === row && cell.dataset.column === column) {
         picked = cell;
-        console.log(picked);
       }
     });
     return picked;
@@ -58,5 +57,10 @@ export default class UI {
       }
       choice.classList.add('ship');
     }
+  }
+
+  static containsShip(row, column) {
+    const cell = this.findCell(row.toString(), column.toString(), 'place-ships-board');
+    return cell.classList.contains('ship');
   }
 }
