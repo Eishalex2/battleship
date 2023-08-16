@@ -45,7 +45,7 @@ export default class UI {
     }
   }
 
-  static placeShip(length, row, column, orientation = 'horiz') {
+  static placeShip(length, row, column, orientation) {
     let choice;
     for (let i = 0; i < length; i++) {
       if (orientation === 'horiz') {

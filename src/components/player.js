@@ -3,12 +3,20 @@ import gameboard from "./gameboard";
 const Player = () => {
   const myBoard = gameboard();
 
-  const attack = (row, column, board) => board.receiveAttack(row, column);
+  const attack = (row, column, board) => {
+    board.receiveAttack(row, column);
+
+    return board.showBoard()[row][column] === 'hit';
+  }
 
   const placeShips = (shipsPlacedArray) => {
     shipsPlacedArray.forEach((object) => {
       myBoard.placeShip(object.ship, object.row, object.column, object.orientation);
     });
+  }
+
+  const placeShipsRandomly = () => {
+    myBoard.randomShipPlacement();
   }
 
   const getMyBoard = () => myBoard
@@ -30,7 +38,7 @@ const Player = () => {
     myBoard.clearBoard();
   }
 
-  return {clearMyBoard, getMyBoard, placeShips, attack, chooseRandomCoord}
+  return {placeShipsRandomly, clearMyBoard, getMyBoard, placeShips, attack, chooseRandomCoord}
 }
 
 export default Player;

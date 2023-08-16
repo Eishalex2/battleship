@@ -1,4 +1,3 @@
-import gameboard from "./components/gameboard";
 import Player from "./components/player";
 import UI from "./visibleBoard";
 
@@ -10,9 +9,7 @@ export default class Gameplay {
   static computer = Player();
 
   static playerMove(row, column) {
-    // this is no longer going to work
-    this.player.attack(row, column, this.computerBoard);
-    const isHit = this.computerBoard.showBoard()[row][column] === 'hit';
+    const isHit = this.player.attack(row, column, this.computer.getMyBoard());
     UI.displayMoveResult(row, column, 'computer-board', isHit);
   }
 
@@ -25,47 +22,13 @@ export default class Gameplay {
     this.player.placeShips(shipsArray);
 
     // enemy places their ships
+    this.computer.placeShipsRandomly();
 
     // show the boards
     UI.createPlayerBoard(this.player.getMyBoard());
-    UI.createOpponentBoard(this.computerBoard);
+    UI.createOpponentBoard(this.computer.getMyBoard());
 
     // take turns and play the game
+
   }
 }
-
-// const game = () => {
-//   const player = Player();
-//   const playerBoard = gameboard();
-
-//   const opponent = Player();
-//   const enemyBoard = gameboard();
-
-//   const startGame = (ships) => {
-//     // reset
-//     playerBoard.clearBoard();
-//     enemyBoard.clearBoard();
-//     createBoard('place-ships-board', playerBoard);
-//   }
-
-//   const playerMove = (row, column) => {
-//     player.attack(row, column, enemyBoard);
-//     const isHit = enemyBoard.showBoard()[row][column] === 'hit';
-//     displayMoveResult(row, column, 'computer-board', isHit);
-//     // need to check if all ships are sunk
-//   }
-
-//   const computerMove = () => {
-//     const coords = opponent.chooseRandomCoord(playerBoard);
-//     opponent.attack(coords[0], coords[1], playerBoard);
-//     const isHit = playerBoard.showBoard()[coords[0]][coords[1]] === 'hit';
-//     displayMoveResult(coords[0].toString(), coords[1].toString(), 'player-board', isHit);
-//     // also need to check if all ships are sunk
-//   }
-
-//   return {
-//     startGame,
-//     playerMove,
-//     computerMove
-//   }
-// }

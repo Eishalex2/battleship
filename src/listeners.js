@@ -4,7 +4,6 @@ import Ship from "./components/ship";
 
 const rotateBtn = document.getElementById('rotate');
 const startBtn = document.getElementById('start');
-const enemyCells = document.querySelectorAll('#computer-board .cell');
 const placeShipsContainer = document.getElementById('place-ships-container');
 const mainBoardsContainer = document.getElementById('board-container');
 
@@ -44,14 +43,10 @@ export default class Listeners {
   }
 
   static startGame() {
-    console.log(this.shipsPlaced);
     Gameplay.startGame(this.shipsPlaced);
-    this.reset();
     this.addAttackListeners();
     placeShipsContainer.classList.add('hidden');
     mainBoardsContainer.classList.remove('hidden');
-    // hide the place ships board
-    // show the main boards
   }
   
   static addPlaceShipListeners() {
@@ -68,8 +63,10 @@ export default class Listeners {
   }
 
   static addAttackListeners() {
+    const enemyCells = document.querySelectorAll('#computer-board .cell');
     enemyCells.forEach((cell) => {
       cell.addEventListener('click', (e) => {
+        console.log('attack listener fired');
         if (e.target.textContent === '') {
           Gameplay.playerMove(e.target.dataset.row, e.target.dataset.column);
         }

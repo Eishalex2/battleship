@@ -1,3 +1,5 @@
+import Ship from "./ship";
+
 const gameboard = () => {
   const createBoard = () => {
     const board = [...Array(10)].map(() => Array(10).fill(""));
@@ -10,6 +12,16 @@ const gameboard = () => {
   }
 
   const ships = [];
+
+  const availableShips = () => {
+    const carrier = new Ship(5);
+    const battleship = new Ship(4);
+    const cruiser = new Ship(3);
+    const submarine = new Ship(3);
+    const destroyer = new Ship(2);
+  
+    return [carrier, battleship, cruiser, submarine, destroyer]
+  } 
 
   const board = createBoard();
 
@@ -26,10 +38,59 @@ const gameboard = () => {
         }
       } else {
         for (let i = 1; i < ship.length; i++) {
-          board[row + 1][col] = ship;
+          board[row + i][col] = ship;
         }
       }
     }
+  }
+
+  const randomShipPlacement = () => {
+    const randomShips = availableShips();
+    const orientations = ['horiz', 'vert'];
+
+    randomShips.forEach((object) => {
+      let row;
+      let column;
+      let orientation;
+      let flag;
+      function getRandom() {
+        row = Math.floor(Math.random() * 10);
+        column = Math.floor(Math.random() * 10);
+
+        orientation = orientations[Math.floor(Math.random()) * 2];
+        if (orientation === 'horiz' && (column + object.length - 1) > 9) {
+          getRandom();
+        }
+        if (orientation === 'vert' && (row + object.length - 1) > 0) {
+          getRandom();
+        }
+        // false = no ship
+        flag = false;
+        if (orientation === 'horiz') {
+          for (let i = column; i < column + object.length; i++) {
+            if (!flag) {
+              flag = (board[row][i] !== '');
+            }
+          }
+          if (flag) {
+            getRandom();
+          }
+        }
+        if (orientation === 'vert') {
+          for (let i = row; i < row + object.length; i++) {
+            if (!flag) {
+              flag = (board[i][column] !== '');
+            }
+          }
+          if (flag) {
+            getRandom();
+          }
+        }
+      }
+      getRandom();
+      console.log(orientation);
+      placeShip(object, row, column, orientation);
+    });
   }
 
   function allSunk() {
@@ -56,7 +117,7 @@ const gameboard = () => {
     }
   }
 
-  return {allSunk, clearBoard, showBoard, placeShip, receiveAttack}
+  return {randomShipPlacement, allSunk, clearBoard, showBoard, placeShip, receiveAttack}
 }
 
 export default gameboard;
