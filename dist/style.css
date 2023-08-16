@@ -39,3 +39,7 @@ body {
 .ship {
   background-color: orange;
 }
+
+#computer-board .ship {
+  background-color: transparent;
+}
