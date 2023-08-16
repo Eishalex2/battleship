@@ -1,12 +1,17 @@
+import gameboard from "./gameboard";
+
 const Player = () => {
+  const myBoard = gameboard();
 
   const attack = (row, column, board) => board.receiveAttack(row, column);
 
-  const placeShips = (shipsArray, board) => {
-    shipsArray.forEach((length) => {
-      board.placeShip(length);
-    })
+  const placeShips = (shipsPlacedArray) => {
+    shipsPlacedArray.forEach((object) => {
+      myBoard.placeShip(object.ship, object.row, object.column, object.orientation);
+    });
   }
+
+  const getMyBoard = () => myBoard
 
   const chooseRandomCoord = (board) => {
     const row = Math.floor(Math.random() * 10);
@@ -21,7 +26,11 @@ const Player = () => {
     return [row, column];
   }
 
-  return {placeShips, attack, chooseRandomCoord}
+  const clearMyBoard = () => {
+    myBoard.clearBoard();
+  }
+
+  return {clearMyBoard, getMyBoard, placeShips, attack, chooseRandomCoord}
 }
 
 export default Player;

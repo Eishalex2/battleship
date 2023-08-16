@@ -6,10 +6,8 @@ export default class UI {
         cell.classList.add('cell');
         cell.dataset.row = row;
         cell.dataset.column  = column;
-        if (board && board.showBoard()[row][column] === 'miss') {
-          cell.classList.add('miss');
-        } else if (board && board.showBoard()[row][column] === 'hit') {
-          cell.classList.add('hit');
+        if (board && board.showBoard()[row][column] !== '') {
+          cell.classList.add('ship');
         }
         document.getElementById(id).appendChild(cell);
       }

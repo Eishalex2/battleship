@@ -1,7 +1,12 @@
 import Gameplay from './gameplay'
 import UI from "./visibleBoard";
-import Player from "./components/player";
 import Ship from "./components/ship";
+
+const rotateBtn = document.getElementById('rotate');
+const startBtn = document.getElementById('start');
+const enemyCells = document.querySelectorAll('#computer-board .cell');
+const placeShipsContainer = document.getElementById('place-ships-container');
+const mainBoardsContainer = document.getElementById('board-container');
 
 
 const availableShips = () => {
@@ -27,7 +32,26 @@ export default class Listeners {
   static eventListeners() {
     UI.createBoard('place-ships-board');
 
+    rotateBtn.addEventListener('click', () => {
+      this.rotateShip();
+    });
+
+    startBtn.addEventListener('click', () => {
+      this.startGame();
+    })
+
     this.addPlaceShipListeners();
+  }
+
+  static startGame() {
+    console.log(this.shipsPlaced);
+    Gameplay.startGame(this.shipsPlaced);
+    this.reset();
+    this.addAttackListeners();
+    placeShipsContainer.classList.add('hidden');
+    mainBoardsContainer.classList.remove('hidden');
+    // hide the place ships board
+    // show the main boards
   }
   
   static addPlaceShipListeners() {
@@ -36,7 +60,6 @@ export default class Listeners {
       cell.addEventListener('click', (e) => {
         const { row } = e.target.dataset;
         const { column } = e.target.dataset;
-        const currentShip = this.ships[this.shipsIndex];
         if (this.shipIndex < 5 && this.isLegalShipPlacement(this.ships[this.shipIndex].length, row, column)) {
           this.placeShip(row, column);
         }
@@ -44,9 +67,25 @@ export default class Listeners {
     });
   }
 
+  static addAttackListeners() {
+    enemyCells.forEach((cell) => {
+      cell.addEventListener('click', (e) => {
+        if (e.target.textContent === '') {
+          Gameplay.playerMove(e.target.dataset.row, e.target.dataset.column);
+        }
+      });
+    });
+  }
+
   static placeShip(row, column) {
     UI.placeShip(this.ships[this.shipIndex].length, row, column, this.orientation);
-    this.shipsPlaced.push(this.ships[this.shipIndex]);
+    const shipsInfoObject = {
+      "ship": this.ships[this.shipIndex],
+      "row": Number(row),
+      "column": Number(column),
+      "orientation": this.orientation
+    }
+    this.shipsPlaced.push(shipsInfoObject);
     this.shipIndex += 1;
   }
 
@@ -68,10 +107,29 @@ export default class Listeners {
       }
       return (!flag);
     }
-    
-    // return (Number(column) + length - 1) < 10;
-    // if (this.orientation === 'vert') return (Number(column) + length - 1) < 10;
 
-    // check if any of the cells has a ship already in it
+    if (this.orientation === 'vert') {
+      if (Number(row) + length - 1 > 9) return false;
+
+      let flag = false;
+      for (let i = Number(row); i < Number(row) + length; i++) {
+        if (!flag) {
+          flag = UI.containsShip(i, column);
+        }
+      }
+      return (!flag);
+    }
+  }
+
+  static rotateShip() {
+    this.orientation = this.orientation === 'horiz' ? 'vert' : 'horiz';
+  }
+
+  static reset() {
+    UI.createBoard('place-ships-board');
+    this.orientation = 'horiz';
+    this.shipIndex = 0;
+    this.shipsPlaced = [];
+    this.addPlaceShipListeners();
   }
 }
