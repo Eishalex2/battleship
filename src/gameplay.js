@@ -11,6 +11,20 @@ export default class Gameplay {
   static playerMove(row, column) {
     const isHit = this.player.attack(row, column, this.computer.getMyBoard());
     UI.displayMoveResult(row, column, 'computer-board', isHit);
+    if (this.computer.gameOver()) {
+      console.log('Player win!');      // player has won
+    }
+    this.computerMove();
+  }
+
+  static computerMove() {
+    const coords = this.computer.chooseRandomCoord(this.player.getMyBoard());
+    const isHit = this.computer.attack(coords[0], coords[1], this.player.getMyBoard());
+    UI.displayMoveResult(coords[0].toString(), coords[1].toString(), 'player-board', isHit);
+    if (this.player.gameOver()) {
+      console.log('Computer win!')
+      // computer has won
+    }
   }
 
   static startGame(shipsArray) {

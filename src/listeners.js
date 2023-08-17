@@ -66,7 +66,6 @@ export default class Listeners {
     const enemyCells = document.querySelectorAll('#computer-board .cell');
     enemyCells.forEach((cell) => {
       cell.addEventListener('click', (e) => {
-        console.log('attack listener fired');
         if (e.target.textContent === '') {
           Gameplay.playerMove(e.target.dataset.row, e.target.dataset.column);
         }

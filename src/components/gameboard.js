@@ -88,7 +88,6 @@ const gameboard = () => {
         }
       }
       getRandom();
-      console.log(orientation);
       placeShip(object, row, column, orientation);
     });
   }

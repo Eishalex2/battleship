@@ -28,7 +28,7 @@ const Player = () => {
     const boardCell = board.showBoard()[row][column];
 
     if (boardCell === 'miss' || boardCell === 'hit') {
-      chooseRandomCoord();
+      chooseRandomCoord(board);
     } 
 
     return [row, column];
@@ -38,7 +38,9 @@ const Player = () => {
     myBoard.clearBoard();
   }
 
-  return {placeShipsRandomly, clearMyBoard, getMyBoard, placeShips, attack, chooseRandomCoord}
+  const gameOver = () => myBoard.allSunk()
+
+  return {gameOver, placeShipsRandomly, clearMyBoard, getMyBoard, placeShips, attack, chooseRandomCoord}
 }
 
 export default Player;
