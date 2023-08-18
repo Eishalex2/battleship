@@ -43,3 +43,17 @@ body {
 #computer-board .ship {
   background-color: transparent;
 }
+
+#end-game-popup {
+  position: fixed;
+  opacity: 0%;
+  top: 30%;
+  left: 50%;
+  text-align: center;
+  background-color: pink;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#end-game-popup.show {
+  opacity: 100%;
+}
