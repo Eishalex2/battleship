@@ -12,9 +12,11 @@ export default class Gameplay {
     const isHit = this.player.attack(row, column, this.computer.getMyBoard());
     UI.displayMoveResult(row, column, 'computer-board', isHit);
     if (this.computer.gameOver()) {
-      console.log('Player win!');      // player has won
+      UI.playerWins();     // player has won
     }
-    this.computerMove();
+    setTimeout(() => {
+      this.computerMove();
+    }, 300);
   }
 
   static computerMove() {
@@ -22,7 +24,7 @@ export default class Gameplay {
     const isHit = this.computer.attack(coords[0], coords[1], this.player.getMyBoard());
     UI.displayMoveResult(coords[0].toString(), coords[1].toString(), 'player-board', isHit);
     if (this.player.gameOver()) {
-      console.log('Computer win!')
+      UI.computerWins();
       // computer has won
     }
   }

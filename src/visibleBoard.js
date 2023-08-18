@@ -61,4 +61,14 @@ export default class UI {
     const cell = this.findCell(row.toString(), column.toString(), 'place-ships-board');
     return cell.classList.contains('ship');
   }
+
+  static playerWins() {
+    document.querySelector('div h2').textContent = 'You win!';
+    document.getElementById('end-game-popup').classList.add('show'); 
+  }
+
+  static computerWins() {
+    document.querySelector('div h2').textContent = 'Computer wins!';
+    document.getElementById('end-game-popup').classList.add('show');
+  }
 }

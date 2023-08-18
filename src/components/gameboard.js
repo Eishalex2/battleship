@@ -1,17 +1,22 @@
 import Ship from "./ship";
 
 const gameboard = () => {
+  let board;
+
   const createBoard = () => {
-    const board = [...Array(10)].map(() => Array(10).fill(""));
+    board = [...Array(10)].map(() => Array(10).fill(""));
     return board;
   }
+
+
+
+  let ships = [];
 
   const clearBoard = () => {
-    const board = [...Array(10)].map(() => Array(10).fill(""));
+    board = [...Array(10)].map(() => Array(10).fill(""));
+    ships = [];
     return board;
   }
-
-  const ships = [];
 
   const availableShips = () => {
     const carrier = new Ship(5);
@@ -23,7 +28,7 @@ const gameboard = () => {
     return [carrier, battleship, cruiser, submarine, destroyer]
   } 
 
-  const board = createBoard();
+  board = createBoard();
 
   const showBoard = () => board;
 

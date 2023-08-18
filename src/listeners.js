@@ -4,6 +4,7 @@ import Ship from "./components/ship";
 
 const rotateBtn = document.getElementById('rotate');
 const startBtn = document.getElementById('start');
+const playAgainBtn = document.getElementById('play-again');
 const placeShipsContainer = document.getElementById('place-ships-container');
 const mainBoardsContainer = document.getElementById('board-container');
 
@@ -35,14 +36,24 @@ export default class Listeners {
       this.rotateShip();
     });
 
+    // having some trouble with resetting and playing a new game. Need
+    // to reset the main boards. They aren't clearing properly
     startBtn.addEventListener('click', () => {
       this.startGame();
-    })
+    });
+
+    playAgainBtn.addEventListener('click', () => {
+      placeShipsContainer.classList.remove('hidden');
+      document.getElementById('end-game-popup').classList.remove('show');
+      mainBoardsContainer.classList.add('hidden');
+    });
 
     this.addPlaceShipListeners();
   }
 
   static startGame() {
+    document.getElementById('computer-board').textContent = '';
+    document.getElementById('player-board').textContent = '';
     Gameplay.startGame(this.shipsPlaced);
     this.addAttackListeners();
     placeShipsContainer.classList.add('hidden');
