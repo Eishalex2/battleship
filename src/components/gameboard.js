@@ -62,11 +62,11 @@ const gameboard = () => {
         row = Math.floor(Math.random() * 10);
         column = Math.floor(Math.random() * 10);
 
-        orientation = orientations[Math.floor(Math.random()) * 2];
+        orientation = orientations[Math.floor(Math.random() * 2)];
         if (orientation === 'horiz' && (column + object.length - 1) > 9) {
           getRandom();
         }
-        if (orientation === 'vert' && (row + object.length - 1) > 0) {
+        if (orientation === 'vert' && (row + object.length - 1) > 9) {
           getRandom();
         }
         // false = no ship
@@ -81,6 +81,8 @@ const gameboard = () => {
             getRandom();
           }
         }
+
+        flag = false;
         if (orientation === 'vert') {
           for (let i = row; i < row + object.length; i++) {
             if (!flag) {
@@ -93,6 +95,7 @@ const gameboard = () => {
         }
       }
       getRandom();
+
       placeShip(object, row, column, orientation);
     });
   }

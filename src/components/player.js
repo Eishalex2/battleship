@@ -36,7 +36,6 @@ const Player = () => {
 
   const clearMyBoard = () => {
     myBoard.clearBoard();
-    console.log(myBoard.showBoard());
   }
 
   const gameOver = () => myBoard.allSunk()

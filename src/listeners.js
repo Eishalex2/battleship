@@ -39,6 +39,8 @@ export default class Listeners {
     // having some trouble with resetting and playing a new game. Need
     // to reset the main boards. They aren't clearing properly
     startBtn.addEventListener('click', () => {
+      document.getElementById('player-board').textContent = '';
+      document.getElementById('computer-board').textContent = '';
       this.startGame();
     });
 
@@ -52,10 +54,9 @@ export default class Listeners {
   }
 
   static startGame() {
-    document.getElementById('computer-board').textContent = '';
-    document.getElementById('player-board').textContent = '';
     Gameplay.startGame(this.shipsPlaced);
     this.addAttackListeners();
+    this.reset();
     placeShipsContainer.classList.add('hidden');
     mainBoardsContainer.classList.remove('hidden');
   }
@@ -133,6 +134,7 @@ export default class Listeners {
   }
 
   static reset() {
+    document.getElementById('place-ships-board').textContent = '';
     UI.createBoard('place-ships-board');
     this.orientation = 'horiz';
     this.shipIndex = 0;

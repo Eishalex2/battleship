@@ -20,7 +20,13 @@ body {
 
 .cell {
   border: 0.5px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
 }
+
+
 
 .hidden {
   visibility: hidden;
@@ -44,6 +50,14 @@ body {
   background-color: transparent;
 }
 
+.cell.hit {
+  background-color: lightblue;
+}
+
+.cell.miss {
+  background-color: lightsalmon;
+}
+
 #end-game-popup {
   position: fixed;
   opacity: 0%;
@@ -52,8 +66,10 @@ body {
   text-align: center;
   background-color: pink;
   transition: opacity 0.5s ease-in-out;
+  z-index: -1;
 }
 
 #end-game-popup.show {
   opacity: 100%;
+  z-index: 2;
 }

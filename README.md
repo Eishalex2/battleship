@@ -7,7 +7,8 @@
 could have it be a queue)
 // improve visuals
 // Add game ends visuals
-// Add new game functionality
+// Add new game functionality (done, but may need to mess with the
+z-index of the popup, or just set it to display none, and ditch the animation)
 // Add remaining ships visuals
 // Recheck and revise tests
 

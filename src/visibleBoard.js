@@ -38,6 +38,7 @@ export default class UI {
 
     if (isHit) {
       picked.classList.add('hit');
+      picked.classList.remove('ship');
       picked.textContent = 'O';
     } else {
       picked.classList.add('miss');
