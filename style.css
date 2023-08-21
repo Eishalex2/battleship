@@ -3,8 +3,29 @@ body {
 }
 
 #board-container {
-  display: flex;
-  gap: 10%;
+  display: grid;
+  grid-template-areas: 
+    "player-label computer-label"
+    "player-board computer-board";
+  justify-content: space-evenly;
+}
+
+.player-label {
+  grid-area: player-label;
+  place-self: center;
+}
+
+#player-board {
+  grid-area: player-board;
+}
+
+.computer-label {
+  grid-area: computer-label;
+  place-self: center;
+}
+
+#computer-board {
+  grid-area: computer-board;
 }
 
 #player-board, 
