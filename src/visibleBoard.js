@@ -65,7 +65,12 @@ export default class UI {
 
   static playerWins() {
     document.querySelector('div h2').textContent = 'You win!';
-    document.getElementById('end-game-popup').classList.add('show'); 
+    document.getElementById('end-game-popup').classList.add('show');
+    document.querySelectorAll('#computer-board .cell').forEach((cell) => {
+      cell.addEventListener('click', (e) => {
+        e.preventDefault();
+      })
+    })
   }
 
   static computerWins() {

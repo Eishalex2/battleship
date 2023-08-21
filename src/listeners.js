@@ -78,7 +78,11 @@ export default class Listeners {
     const enemyCells = document.querySelectorAll('#computer-board .cell');
     enemyCells.forEach((cell) => {
       cell.addEventListener('click', (e) => {
-        if (e.target.textContent === '') {
+        if (document.getElementById('end-game-popup').classList.contains('show')) {
+          console.log('attack conditional ran');
+          e.preventDefault();
+        }
+        else if (e.target.textContent === '') {
           Gameplay.playerMove(e.target.dataset.row, e.target.dataset.column);
         }
       });
