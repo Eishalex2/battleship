@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   position: relative;
 }
@@ -28,6 +34,67 @@ body {
   grid-area: computer-board;
 }
 
+#place-ships-container {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  grid-template-areas: 
+    "place-ships-label place-ships-label"
+    "place-ships-board place-ships-board"
+    "rotate-btn start-btn";
+  position: fixed;
+  top: 5%;
+  left: 35.2%;
+}
+
+#place-ships-container h2 {
+  grid-area: place-ships-label;
+  place-self: center;
+}
+
+#place-ships-board {
+  grid-area: place-ships-board;
+  margin-bottom: 20px;
+  margin-top: 15px;
+}
+
+#place-ships-board:hover {
+  cursor: pointer;
+}
+
+#rotate {
+  grid-area: rotate-btn;
+  width: 90%;
+  color: white;
+  background-color: rgba(3, 71, 100, 0.5);
+  transition: background-color 0.4s ease-in-out;
+}
+
+#rotate:hover {
+  cursor: pointer;
+  background-color: rgba(3, 71, 100, 1.0)
+}
+
+#rotate,
+#start {
+  height: 250%;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#start {
+  grid-area: start-btn;
+  background-color: rgba(132, 226, 150, 0.5);
+  transition: background-color 0.4s ease-in-out;
+}
+
+#start:hover {
+  cursor: pointer;
+  background-color: rgba(132, 226, 150, 1.0);
+}
+
 #player-board, 
 #computer-board,
 #place-ships-board {
@@ -53,18 +120,8 @@ body {
   visibility: hidden;
 }
 
-#place-ships-container {
-  position: fixed;
-  top: 10%;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-}
-
 .ship {
-  background-color: orange;
+  background-color: #363732;
 }
 
 #computer-board .ship {
@@ -72,22 +129,54 @@ body {
 }
 
 .cell.hit {
-  background-color: lightblue;
+  background-color: #BB4430;
+  color: white;
 }
 
 .cell.miss {
-  background-color: lightsalmon;
+  background-color: #a0ddff;
 }
 
 #end-game-popup {
   position: fixed;
   opacity: 0%;
   top: 30%;
-  left: 50%;
+  left: 38.4%;
   text-align: center;
-  background-color: pink;
+  background-color: #ffdadf;
   transition: opacity 0.5s ease-in-out;
   z-index: -1;
+  width: 400px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 35px;
+  border-radius: 15px;
+}
+
+.winner {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+#play-again {
+  border: none;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  background-color: rgb(5, 74, 145);
+  transition: transform 0.3s ease-in-out;
+  width: 60%;
+  height: 35%;
+  font-size: 2rem;
+  border-radius: 15px;
+}
+
+#play-again:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 #end-game-popup.show {

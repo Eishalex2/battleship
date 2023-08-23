@@ -64,7 +64,7 @@ export default class UI {
   }
 
   static playerWins() {
-    document.querySelector('div h2').textContent = 'You win!';
+    document.querySelector('div .winner').textContent = 'You win!';
     document.getElementById('end-game-popup').classList.add('show');
     document.querySelectorAll('#computer-board .cell').forEach((cell) => {
       cell.addEventListener('click', (e) => {
@@ -74,7 +74,7 @@ export default class UI {
   }
 
   static computerWins() {
-    document.querySelector('div h2').textContent = 'Computer wins!';
+    document.querySelector('div .winner').textContent = 'Computer wins!';
     document.getElementById('end-game-popup').classList.add('show');
   }
 }
