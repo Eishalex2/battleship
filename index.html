@@ -4,18 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <title>Document</title>
+  <title>Battleship</title>
 </head>
 <body>
 
+  <h1>Battleship!</h1>
+
+  <aside class="key hidden">
+    <h3>Key</h3>
+    <p>"X" = miss</p>
+    <p>"O" = hit</p>
+  </aside>
+
   <div id="board-container" class="hidden">
-    <h1 class="player-label">Player</h1>
+    <h2 class="player-label">Player</h2>
     <div id="player-board"></div>
-    <h1 class ="computer-label">Computer</h1>
+    <div class="player-ships">Ships Remaining: </div>
+    <h2 class ="computer-label">Computer</h2>
     <div id="computer-board"></div>
+    <div class="computer-ships">Ships Remaining: </div>
   </div>
 
-  <div id="place-ships-container" class="hidden">
+  <div id="place-ships-container">
     <h2>Place your ships!</h2>
     <div id="place-ships-board"></div>
     <button id="rotate">Rotate</button>
@@ -23,7 +33,7 @@
   </div>
 
   <div id="end-game-popup">
-    <div class="winner">You won!</div>
+    <div class="winner"></div>
     <button id="play-again">Play again?</button>
   </div>
 
