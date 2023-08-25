@@ -44,13 +44,23 @@ aside h3 {
 }
 
 #board-container {
+  background-color: pink;
   display: grid;
   grid-template-areas: 
     "player-label computer-label"
-    "player-board computer-board";
-  justify-content: space-evenly;
-  margin-top: 3%;
-  row-gap: 20px;
+    "player-board computer-board"
+    "player-ships computer-ships";
+  align-items: center;
+  justify-items: center;
+  column-gap: 10px;
+  padding: 10px;
+  width: 100vw;
+  height: 80vh;
+}
+
+#player-board,
+#computer-board {
+  margin: 10px 0 10px 0;
 }
 
 .computer-ships,
@@ -58,9 +68,19 @@ aside h3 {
   font-size: 2rem;
 }
 
+.computer-ships {
+  grid-area: computer-ships;
+  place-self: start center;
+}
+
+.player-ships {
+  grid-area: player-ships;
+  place-self: start center;
+}
+
 .player-label {
   grid-area: player-label;
-  place-self: center;
+  place-self: end center;
 }
 
 #player-board {
@@ -69,7 +89,7 @@ aside h3 {
 
 .computer-label {
   grid-area: computer-label;
-  place-self: center;
+  place-self: end center;
 }
 
 #computer-board {
@@ -77,30 +97,30 @@ aside h3 {
 }
 
 #place-ships-container {
-  display: grid;
-  grid-template-columns: 45% 55%;
-  grid-template-areas: 
-    "place-ships-label place-ships-label"
-    "place-ships-board place-ships-board"
-    "rotate-btn start-btn";
+  display: flex;
+  flex-direction: column;
   position: fixed;
-  top: 15%;
-  left: 35.2%;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 h2 {
   font-size: 2rem;
 }
 
-#place-ships-container h2 {
-  grid-area: place-ships-label;
-  place-self: center;
-}
-
-#place-ships-board {
-  grid-area: place-ships-board;
-  margin-bottom: 20px;
-  margin-top: 15px;
+div#place-ships-container div#place-ships-board {
+  margin: 20px 0 20px 0;
+  flex-shrink: 0;
+  aspect-ratio: 1/1;
+  width: clamp(300px, 50%, 500px);
 }
 
 #place-ships-board:hover {
@@ -108,9 +128,9 @@ h2 {
 }
 
 #rotate {
-  grid-area: rotate-btn;
-  width: 90%;
   color: white;
+  height: 75px;
+  width: 40%;
   background-color: rgba(3, 71, 100, 0.5);
   transition: background-color 0.4s ease-in-out;
 }
@@ -122,7 +142,6 @@ h2 {
 
 #rotate,
 #start {
-  height: 250%;
   outline: none;
   border: none;
   border-radius: 10px;
@@ -130,8 +149,15 @@ h2 {
   font-weight: bold;
 }
 
+.button-container {
+  display: flex;
+  gap: 20px;
+  width: 500px;
+  justify-content: space-between;
+}
+
 #start {
-  grid-area: start-btn;
+  width: 60%;
   background-color: rgba(132, 226, 150, 0.5);
   transition: background-color 0.4s ease-in-out;
 }
@@ -144,8 +170,8 @@ h2 {
 #player-board, 
 #computer-board,
 #place-ships-board {
-  width: 500px;
-  height: 500px;
+  width: clamp(300px, 100%, 500px);
+  aspect-ratio: 1/1;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
