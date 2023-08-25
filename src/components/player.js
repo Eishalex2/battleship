@@ -17,6 +17,7 @@ const Player = () => {
 
   const placeShipsRandomly = () => {
     myBoard.randomShipPlacement();
+    console.log(myBoard.showBoard());
   }
 
   const getMyBoard = () => myBoard
