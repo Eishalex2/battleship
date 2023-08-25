@@ -7,6 +7,7 @@ const startBtn = document.getElementById('start');
 const playAgainBtn = document.getElementById('play-again');
 const placeShipsContainer = document.getElementById('place-ships-container');
 const mainBoardsContainer = document.getElementById('board-container');
+const key = document.querySelector('.key');
 
 
 const availableShips = () => {
@@ -48,6 +49,7 @@ export default class Listeners {
       placeShipsContainer.classList.remove('hidden');
       document.getElementById('end-game-popup').classList.remove('show');
       mainBoardsContainer.classList.add('hidden');
+      key.classList.add('hidden');
     });
 
     this.addPlaceShipListeners();
@@ -59,6 +61,7 @@ export default class Listeners {
     this.reset();
     placeShipsContainer.classList.add('hidden');
     mainBoardsContainer.classList.remove('hidden');
+    key.classList.remove('hidden');
   }
   
   static addPlaceShipListeners() {

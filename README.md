@@ -18,3 +18,11 @@ be blue for water.
 When you're placing the ships, have the ships names on the place board
 container.
 
+6 things remaining:
+- (done) Add a key (X = miss, O = hit)
+- Ships remaining capability
+- Make it so that ships cannot be placed next to or adjacent from each
+  other
+- Add a custom message when placing each ship (Place your destroyer, etc.)
+- Improve computer AI
+- Recheck and revise tests

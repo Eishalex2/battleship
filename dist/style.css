@@ -8,12 +8,54 @@ body {
   position: relative;
 }
 
+h1 {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 3rem;
+  text-decoration: underline;
+}
+
+aside {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+aside p {
+  font-size: 1rem;
+}
+
+aside p:nth-of-type(1) {
+  background-color: #a0ddff;
+  margin-bottom: 2px;
+}
+
+aside p:nth-of-type(2) {
+  background-color: #BB4430;
+  color: white;
+}
+
+aside h3 {
+  padding-bottom: 3px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
 #board-container {
   display: grid;
   grid-template-areas: 
     "player-label computer-label"
     "player-board computer-board";
   justify-content: space-evenly;
+  margin-top: 3%;
+  row-gap: 20px;
+}
+
+.computer-ships,
+.player-ships {
+  font-size: 2rem;
 }
 
 .player-label {
@@ -42,8 +84,12 @@ body {
     "place-ships-board place-ships-board"
     "rotate-btn start-btn";
   position: fixed;
-  top: 5%;
+  top: 15%;
   left: 35.2%;
+}
+
+h2 {
+  font-size: 2rem;
 }
 
 #place-ships-container h2 {
@@ -113,8 +159,6 @@ body {
   align-items: center;
   font-size: 2rem;
 }
-
-
 
 .hidden {
   visibility: hidden;
