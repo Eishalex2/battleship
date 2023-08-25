@@ -73,6 +73,14 @@ export default class UI {
     })
   }
 
+  static showRemainingPlayerShips(num) {
+    document.querySelector('.player-ships').textContent = `Ships Remaining: ${num}`;
+  }
+
+  static showRemainingComputerShips(num) {
+    document.querySelector('.computer-ships').textContent = `Ships Remaining: ${num}`;
+  }
+
   static computerWins() {
     document.querySelector('div .winner').textContent = 'Computer wins!';
     document.getElementById('end-game-popup').classList.add('show');

@@ -8,8 +8,6 @@ const gameboard = () => {
     return board;
   }
 
-
-
   let ships = [];
 
   const clearBoard = () => {
@@ -100,6 +98,17 @@ const gameboard = () => {
     });
   }
 
+  const getNumRemaining = () => 
+    // for each ship in the ships array, check if it's sunk or not. If
+    // it's not sunk, add one to the count.
+     ships.reduce((total, ship) => {
+      if (!ship.isSunk()) {
+        total += 1;
+      }
+      return total;
+    }, 0);
+  
+
   function allSunk() {
     return ships.every(ship => ship.isSunk());
   }
@@ -124,7 +133,7 @@ const gameboard = () => {
     }
   }
 
-  return {randomShipPlacement, allSunk, clearBoard, showBoard, placeShip, receiveAttack}
+  return {getNumRemaining, randomShipPlacement, allSunk, clearBoard, showBoard, placeShip, receiveAttack}
 }
 
 export default gameboard;

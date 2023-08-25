@@ -40,7 +40,9 @@ const Player = () => {
 
   const gameOver = () => myBoard.allSunk()
 
-  return {gameOver, placeShipsRandomly, clearMyBoard, getMyBoard, placeShips, attack, chooseRandomCoord}
+  const getRemainingShips = () => myBoard.getNumRemaining()
+
+  return {getRemainingShips, gameOver, placeShipsRandomly, clearMyBoard, getMyBoard, placeShips, attack, chooseRandomCoord}
 }
 
 export default Player;

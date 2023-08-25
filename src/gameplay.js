@@ -11,6 +11,7 @@ export default class Gameplay {
   static playerMove(row, column) {
     const isHit = this.player.attack(row, column, this.computer.getMyBoard());
     UI.displayMoveResult(row, column, 'computer-board', isHit);
+    UI.showRemainingComputerShips(this.computer.getRemainingShips());
     if (this.computer.gameOver()) {
       UI.playerWins();     // player has won
     }
@@ -23,6 +24,7 @@ export default class Gameplay {
     const coords = this.computer.chooseRandomCoord(this.player.getMyBoard());
     const isHit = this.computer.attack(coords[0], coords[1], this.player.getMyBoard());
     UI.displayMoveResult(coords[0].toString(), coords[1].toString(), 'player-board', isHit);
+    UI.showRemainingPlayerShips(this.player.getRemainingShips());
     if (this.player.gameOver()) {
       UI.computerWins();
       // computer has won
@@ -44,7 +46,7 @@ export default class Gameplay {
     UI.createPlayerBoard(this.player.getMyBoard());
     UI.createOpponentBoard(this.computer.getMyBoard());
 
-    // take turns and play the game
-
+    UI.showRemainingComputerShips(this.computer.getRemainingShips());
+    UI.showRemainingPlayerShips(this.player.getRemainingShips());
   }
 }
