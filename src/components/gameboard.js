@@ -17,11 +17,11 @@ const gameboard = () => {
   }
 
   const availableShips = () => {
-    const carrier = new Ship('carrier', 5);
-    const battleship = new Ship('battleship', 4);
-    const cruiser = new Ship('cruiser', 3);
-    const submarine = new Ship('submarine', 3);
-    const destroyer = new Ship('destroyer', 2);
+    const carrier = new Ship(5);
+    const battleship = new Ship(4);
+    const cruiser = new Ship(3);
+    const submarine = new Ship(3);
+    const destroyer = new Ship(2);
   
     return [carrier, battleship, cruiser, submarine, destroyer]
   }
@@ -30,39 +30,40 @@ const gameboard = () => {
 
   const showBoard = () => board;
 
-  const placeShip = (ship, row, col, orientation) => {
-    if (board[row][col] !== ship) {
+  const placeShip = (length, row, col, orientation) => {
+    if (typeof(board[row][col]) !== 'object') {
+      const ship = new Ship(length);
       ships.push(ship);
       board[row][col] = ship;
 
       if (orientation === 'horiz') {
-        for (let i = 1; i < ship.length; i++) {
+        for (let i = 1; i < length; i++) {
           board[row][col + i] = ship;
         }
       } else {
-        for (let i = 1; i < ship.length; i++) {
+        for (let i = 1; i < length; i++) {
           board[row + i][col] = ship;
         }
       }
     }
   }
 
-  const noAdjacentShips = (ship, row, col, orientation) => {
+  const noAdjacentShips = (length, row, col, orientation) => {
     // diagonals are allowed
     if (orientation === 'horiz') {
       if (col > 0 && board[row][col - 1] !== '') return false;
-      for (let i = 0; i < ship.length; i++) {
+      for (let i = 0; i < length; i++) {
           if (row > 0 && board[row - 1][col + i] !== '') return false;
           if (row < 9 && board[row + 1][col + i] !== '') return false;
       }
-      if ((col + ship.length) < 10 && board[row][col + ship.length] !== '') return false;
+      if ((col + length) < 10 && board[row][col + length] !== '') return false;
     } else {
         if (row > 0 && board[row - 1][col] !== '') return false;
-        for (let i = 0; i < ship.length; i++) {
+        for (let i = 0; i < length; i++) {
             if (col > 0 && board[row + i][col - 1] !== '') return false;
             if (col < 9 && board[row + i][col + 1] !== '') return false;
         }
-        if ((row + ship.length) < 10 && board[row + ship.length][col] !== '') return false;
+        if ((row + length) < 10 && board[row + length][col] !== '') return false;
     }
     return true;
   }
@@ -83,10 +84,10 @@ const gameboard = () => {
         if (orientation === 'horiz' && (column + object.length - 1) > 9) continue;
         if (orientation === 'vert' && (row + object.length - 1) > 9) continue;
 
-        if (board[row][column] === '' && (noAdjacentShips(object, row, column, orientation))) break;
+        if (board[row][column] === '' && (noAdjacentShips(object.length, row, column, orientation))) break;
       }
 
-      placeShip(object, row, column, orientation);
+      placeShip(object.length, row, column, orientation);
     });
   }
 
@@ -94,6 +95,9 @@ const gameboard = () => {
     // for each ship in the ships array, check if it's sunk or not. If
     // it's not sunk, add one to the count.
      ships.reduce((total, ship) => {
+      if (ship.isSunk()) {
+        // console.log(ship.name);
+      }
       if (!ship.isSunk()) {
         total += 1;
       }

@@ -11,25 +11,14 @@ const key = document.querySelector('.key');
 const shipName = document.querySelector('#place-ships-container h2');
 
 
-const availableShips = () => {
-  const carrier = new Ship('carrier', 5);
-  const battleship = new Ship('battleship', 4);
-  const cruiser = new Ship('cruiser', 3);
-  const submarine = new Ship('submarine', 3);
-  const destroyer = new Ship('destroyer', 2);
-
-  return [carrier, battleship, cruiser, submarine, destroyer]
-}
-
-
 export default class Listeners {
   static orientation = 'horiz';
+
+  static shipLengths = [5, 4, 3, 3, 2];
 
   static shipIndex = 0;
 
   static shipsPlaced = [];
-
-  static ships = availableShips();
 
   static eventListeners() {
     UI.createBoard('place-ships-board');
@@ -66,13 +55,13 @@ export default class Listeners {
   }
   
   static addPlaceShipListeners() {
-    shipName.textContent = `Place your ${this.ships[this.shipIndex].name}`;
+    // shipName.textContent = `Place your ${this.ships[this.shipIndex].name}`;
     const cells = document.querySelectorAll('#place-ships-board .cell');
     cells.forEach((cell) => {
       cell.addEventListener('click', (e) => {
         const { row } = e.target.dataset;
         const { column } = e.target.dataset;
-        if (this.shipIndex < 5 && this.isLegalShipPlacement(this.ships[this.shipIndex].length, row, column)) {
+        if (this.shipIndex < 5 && this.isLegalShipPlacement(this.shipLengths[this.shipIndex], row, column)) {
           this.placeShip(row, column);
         }
       });
@@ -94,20 +83,20 @@ export default class Listeners {
   }
 
   static placeShip(row, column) {
-    UI.placeShip(this.ships[this.shipIndex].length, row, column, this.orientation);
+    UI.placeShip(this.shipLengths[this.shipIndex], row, column, this.orientation);
     const shipsInfoObject = {
-      "ship": this.ships[this.shipIndex],
+      "shipLength": this.shipLengths[this.shipIndex],
       "row": Number(row),
       "column": Number(column),
       "orientation": this.orientation
     }
     this.shipsPlaced.push(shipsInfoObject);
     this.shipIndex += 1;
-    if (this.shipIndex < 5) {
-      shipName.textContent = `Place your ${this.ships[this.shipIndex].name}`;
-    } else {
-      shipName.textContent = 'Press start';
-    }
+    // if (this.shipIndex < 5) {
+    //   shipName.textContent = `Place your ${this.ships[this.shipIndex].name}`;
+    // } else {
+    //   shipName.textContent = 'Press start';
+    // }
 
   }
 

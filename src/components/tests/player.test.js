@@ -15,7 +15,7 @@ describe('Player moves', () => {
   });
 
   test('Player hits', () => {
-    computerBoard.placeShip(oneShip, [6,6], [6,6]);
+    computerBoard.placeShip(6, 6, computerBoard);
     player.attack(6, 6, computerBoard);
     expect(computerBoard.showBoard()[6][6]).toBe("hit");
   });

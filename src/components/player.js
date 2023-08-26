@@ -7,13 +7,12 @@ const Player = () => {
 
   const attack = (row, column, board) => {
     board.receiveAttack(row, column);
-
     return board.showBoard()[row][column] === 'hit';
   }
 
   const placeShips = (shipsPlacedArray) => {
     shipsPlacedArray.forEach((object) => {
-      myBoard.placeShip(object.ship, object.row, object.column, object.orientation);
+      myBoard.placeShip(object.shipLength, object.row, object.column, object.orientation);
     });
   }
 
@@ -40,6 +39,7 @@ const Player = () => {
 
   const clearMyBoard = () => {
     myBoard.clearBoard();
+    console.log(myBoard.showBoard());
     previousMoves = [];
   }
 
