@@ -194,7 +194,7 @@ div#place-ships-container div#place-ships-board {
 }
 
 #computer-board .ship {
-  /* background-color: transparent; */
+  background-color: transparent;
 }
 
 .cell.hit {
