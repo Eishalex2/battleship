@@ -23,10 +23,9 @@ container.
 - (done) Ships remaining capability
 - (done) Make it so that ships cannot be placed next to or adjacent from each
   other
-- Add a custom message when placing each ship (Place your destroyer, etc.)
+- (done) Add a custom message when placing each ship (Place your destroyer, etc.)
 - Improve computer AI
 - Recheck and revise tests
 
 Bugs:
-ships remaining
-Computer is missing turns
+ships remaining (player only) - ships do not appear to be resetting
