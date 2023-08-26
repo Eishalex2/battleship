@@ -44,7 +44,6 @@ aside h3 {
 }
 
 #board-container {
-  background-color: pink;
   display: grid;
   grid-template-areas: 
     "player-label computer-label"
@@ -195,7 +194,7 @@ div#place-ships-container div#place-ships-board {
 }
 
 #computer-board .ship {
-  background-color: transparent;
+  /* background-color: transparent; */
 }
 
 .cell.hit {
