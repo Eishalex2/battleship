@@ -27,7 +27,6 @@ export default class Gameplay {
     UI.showRemainingPlayerShips(this.player.getRemainingShips());
     if (this.player.gameOver()) {
       UI.computerWins();
-      // computer has won
     }
   }
 

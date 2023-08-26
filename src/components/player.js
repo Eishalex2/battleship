@@ -3,6 +3,8 @@ import gameboard from "./gameboard";
 const Player = () => {
   const myBoard = gameboard();
 
+  let previousMoves = [];
+
   const attack = (row, column, board) => {
     board.receiveAttack(row, column);
 
@@ -21,21 +23,24 @@ const Player = () => {
 
   const getMyBoard = () => myBoard
 
-  const chooseRandomCoord = (board) => {
-    const row = Math.floor(Math.random() * 10);
-    const column = Math.floor(Math.random() * 10);
+  const moveMade = (row, column) => previousMoves.some(move => move[0] === row && move[1] === column)
 
-    const boardCell = board.showBoard()[row][column];
+  const chooseRandomCoord = () => {
+    let row = Math.floor(Math.random() * 10);
+    let column = Math.floor(Math.random() * 10);
 
-    if (boardCell === 'miss' || boardCell === 'hit') {
-      chooseRandomCoord(board);
+    while (moveMade(row, column)) {
+      row = Math.floor(Math.random() * 10);
+      column = Math.floor(Math.random() * 10);
     } 
 
+    previousMoves.push([row, column]);
     return [row, column];
   }
 
   const clearMyBoard = () => {
     myBoard.clearBoard();
+    previousMoves = [];
   }
 
   const gameOver = () => myBoard.allSunk()

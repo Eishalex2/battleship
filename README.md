@@ -26,3 +26,7 @@ container.
 - Add a custom message when placing each ship (Place your destroyer, etc.)
 - Improve computer AI
 - Recheck and revise tests
+
+Bugs:
+ships remaining
+Computer is missing turns

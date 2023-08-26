@@ -8,14 +8,15 @@ const playAgainBtn = document.getElementById('play-again');
 const placeShipsContainer = document.getElementById('place-ships-container');
 const mainBoardsContainer = document.getElementById('board-container');
 const key = document.querySelector('.key');
+const shipName = document.querySelector('#place-ships-container h2');
 
 
 const availableShips = () => {
-  const carrier = new Ship(5);
-  const battleship = new Ship(4);
-  const cruiser = new Ship(3);
-  const submarine = new Ship(3);
-  const destroyer = new Ship(2);
+  const carrier = new Ship('carrier', 5);
+  const battleship = new Ship('battleship', 4);
+  const cruiser = new Ship('cruiser', 3);
+  const submarine = new Ship('submarine', 3);
+  const destroyer = new Ship('destroyer', 2);
 
   return [carrier, battleship, cruiser, submarine, destroyer]
 }
@@ -37,8 +38,6 @@ export default class Listeners {
       this.rotateShip();
     });
 
-    // having some trouble with resetting and playing a new game. Need
-    // to reset the main boards. They aren't clearing properly
     startBtn.addEventListener('click', () => {
       document.getElementById('player-board').textContent = '';
       document.getElementById('computer-board').textContent = '';
@@ -48,8 +47,10 @@ export default class Listeners {
     playAgainBtn.addEventListener('click', () => {
       placeShipsContainer.classList.remove('hidden');
       document.getElementById('end-game-popup').classList.remove('show');
+      document.querySelector('div .winner').textContent = '';
       mainBoardsContainer.classList.add('hidden');
       key.classList.add('hidden');
+      this.reset();
     });
 
     this.addPlaceShipListeners();
@@ -65,6 +66,7 @@ export default class Listeners {
   }
   
   static addPlaceShipListeners() {
+    shipName.textContent = `Place your ${this.ships[this.shipIndex].name}`;
     const cells = document.querySelectorAll('#place-ships-board .cell');
     cells.forEach((cell) => {
       cell.addEventListener('click', (e) => {
@@ -101,6 +103,12 @@ export default class Listeners {
     }
     this.shipsPlaced.push(shipsInfoObject);
     this.shipIndex += 1;
+    if (this.shipIndex < 5) {
+      shipName.textContent = `Place your ${this.ships[this.shipIndex].name}`;
+    } else {
+      shipName.textContent = 'Press start';
+    }
+
   }
 
   static isLegalShipPlacement(length, row, column) {
