@@ -23,7 +23,7 @@ container.
 - (done) Ships remaining capability
 - (done) Make it so that ships cannot be placed next to or adjacent from each
   other
-- Add a custom message when placing each ship (Place your destroyer, etc.)
+- (done) Add a custom message when placing each ship (Place your destroyer, etc.)
 - (not doing this) Improve computer AI
 - Recheck and revise tests
 

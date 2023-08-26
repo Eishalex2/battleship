@@ -20,6 +20,8 @@ export default class Listeners {
 
   static shipsPlaced = [];
 
+  static shipNames = ['Carrier', 'Battleship', 'Cruiser', 'Submarine', 'Destroyer']
+
   static eventListeners() {
     UI.createBoard('place-ships-board');
 
@@ -55,7 +57,7 @@ export default class Listeners {
   }
   
   static addPlaceShipListeners() {
-    // shipName.textContent = `Place your ${this.ships[this.shipIndex].name}`;
+    shipName.textContent = `Place your ${this.shipNames[this.shipIndex]}`;
     const cells = document.querySelectorAll('#place-ships-board .cell');
     cells.forEach((cell) => {
       cell.addEventListener('click', (e) => {
@@ -92,11 +94,11 @@ export default class Listeners {
     }
     this.shipsPlaced.push(shipsInfoObject);
     this.shipIndex += 1;
-    // if (this.shipIndex < 5) {
-    //   shipName.textContent = `Place your ${this.ships[this.shipIndex].name}`;
-    // } else {
-    //   shipName.textContent = 'Press start';
-    // }
+    if (this.shipIndex < 5) {
+      shipName.textContent = `Place your ${this.shipNames[this.shipIndex]}`;
+    } else {
+      shipName.textContent = 'Press Start';
+    }
 
   }
 

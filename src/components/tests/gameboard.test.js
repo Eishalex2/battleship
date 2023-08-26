@@ -1,10 +1,6 @@
 import gameboard from "../gameboard";
 import Ship from "../ship";
 
-const vertShip = new Ship(3);
-const horizShip = new Ship(2);
-const oneShip = new Ship(1);
-
 let board;
 
 beforeEach(() => {
@@ -12,25 +8,23 @@ beforeEach(() => {
 });
 
 test('ship placed correctly horizontally', () => {
-  board.placeShip(horizShip, [1,2], [1,3]);
-  expect(board.showBoard()[1][2]).toBe(horizShip);
-  expect(board.showBoard()[1][3]).toBe(horizShip);
+  board.placeShip(3, 1, 2, 'horiz');
+  expect(board.showBoard()[1][2]).toBeInstanceOf(Ship);
+  expect(board.showBoard()[1][3]).toBeInstanceOf(Ship);
   expect(board.showBoard()[0][4]).toBe("");
 });
 
 test('ship placed correctly vertically', () => {
-  board.placeShip(vertShip, [0,0], [2,0]);
-  expect(board.showBoard()[0][0]).toBe(vertShip);
-  expect(board.showBoard()[1][0]).toBe(vertShip);
-  expect(board.showBoard()[2][0]).toBe(vertShip);
+  board.placeShip(2, 6, 7, 'vert');
+  expect(board.showBoard()[6][7]).toBeInstanceOf(Ship);
+  expect(board.showBoard()[7][7]).toBeInstanceOf(Ship);
   expect(board.showBoard()[3][0]).toBe("");
 });
 
 test('receive attack hits ship', () => {
-  board.placeShip(oneShip, [4,4], [4,4]);
-  board.receiveAttack(4,4);
-  expect(oneShip.isSunk()).toBeTruthy();
-  expect(board.showBoard()[4][4]).toBe("hit");
+  board.placeShip(4, 3, 3, 'horiz');
+  board.receiveAttack(3, 3);
+  expect(board.showBoard()[3][3]).toBe("hit");
 });
 
 test('cannot guess the same place twice', () => {
@@ -40,18 +34,25 @@ test('cannot guess the same place twice', () => {
 });
 
 test('records misses', () => {
-  board.placeShip(horizShip, [1,2], [1,3]);
+  board.placeShip(1, 5, 5, 'vert');
   board.receiveAttack(6,7);
   expect(board.showBoard()[6][7]).toEqual("miss");
 });
 
 test('checks if all ships are sunk', () => {
-  board.placeShip(oneShip, [4,4], [4,4]);
+  board.placeShip(1, 4, 4, 'vert');
   expect(board.receiveAttack(4,4)).toEqual('Game Over!');
 });
 
 test('continues game if not all ships are sunk', () => {
-  board.placeShip(oneShip, [4,4], [4,4]);
-  board.placeShip(horizShip, [1,2], [1,3]);
+  board.placeShip(1, 4, 4, 'horiz');
+  board.placeShip(2, 0, 0, 'vert');
   expect(board.receiveAttack(4,4)).not.toEqual('Game Over!');
+});
+
+test('returns number of ships remaining', () => {
+  board.placeShip(1, 4, 4, 'horiz');
+  board.placeShip(2, 0, 0, 'vert');
+  board.receiveAttack(4, 4);
+  expect(board.getNumRemaining()).toBe(1);
 });

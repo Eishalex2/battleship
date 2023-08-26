@@ -21,7 +21,7 @@ export default class Gameplay {
   }
 
   static computerMove() {
-    const coords = this.computer.chooseRandomCoord(this.player.getMyBoard());
+    const coords = this.computer.chooseRandomCoord();
     const isHit = this.computer.attack(coords[0], coords[1], this.player.getMyBoard());
     UI.displayMoveResult(coords[0].toString(), coords[1].toString(), 'player-board', isHit);
     UI.showRemainingPlayerShips(this.player.getRemainingShips());
