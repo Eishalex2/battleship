@@ -82,7 +82,6 @@ export default class Listeners {
     enemyCells.forEach((cell) => {
       cell.addEventListener('click', (e) => {
         if (document.getElementById('end-game-popup').classList.contains('show')) {
-          console.log('attack conditional ran');
           e.preventDefault();
         }
         else if (e.target.textContent === '') {
@@ -105,8 +104,6 @@ export default class Listeners {
   }
 
   static isLegalShipPlacement(length, row, column) {
-    // check if any of the cells has a ship in it
-
     // check if ship goes out of bounds
     if (this.orientation === 'horiz') {
       // check if ship goes out of bounds
@@ -134,6 +131,8 @@ export default class Listeners {
       }
       return (!flag);
     }
+
+
   }
 
   static rotateShip() {

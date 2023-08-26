@@ -47,44 +47,24 @@ const gameboard = () => {
     }
   }
 
-  const hasAdjacentShips = (ship, row, col, orientation) => {
-    // may not be testing the adjacent square
+  const noAdjacentShips = (ship, row, col, orientation) => {
+    // diagonals are allowed
     if (orientation === 'horiz') {
-      // check sides
-      for (let i = col - 1; i < ship.length + col + 1; i++) {
-        if (i < 0) continue;
-        if (i > 9) break;
-        if (row > 0 && board[row - 1][i] !== '') return true;
+      if (col > 0 && board[row][col - 1] !== '') return false;
+      for (let i = 0; i < ship.length; i++) {
+          if (row > 0 && board[row - 1][col + i] !== '') return false;
+          if (row < 9 && board[row + 1][col + i] !== '') return false;
       }
-      for (let i = col - 1; i < ship.length + col + 1; i++) {
-        if (i < 0) continue;
-        if (i > 9) break;
-        if (row < 9 && board[row + 1][i] !== '') return true;
-      }
-      // check left and right cells
-      if (col > 0 && board[row][col - 1] !== '') return true;
-      if (col < 9 && board[row][col + 1] !== '') return true;
+      if ((col + ship.length) < 10 && board[row][col + ship.length] !== '') return false;
+    } else {
+        if (row > 0 && board[row - 1][col] !== '') return false;
+        for (let i = 0; i < ship.length; i++) {
+            if (col > 0 && board[row + i][col - 1] !== '') return false;
+            if (col < 9 && board[row + i][col + 1] !== '') return false;
+        }
+        if ((row + ship.length) < 10 && board[row + ship.length][col] !== '') return false;
     }
-
-    if (orientation === 'vert') {
-      // check sides
-      for (let i = row - 1; i < ship.length + row + 1; i++) {
-        if (i < 0) continue;
-        if (i > 9) break;
-        if (col > 0 && board[col - 1][i] !== '') return true;
-      }
-      for (let i = row - 1; i < ship.length + row + 1; i++) {
-        if (i < 0) continue;
-        if (i > 9) break;
-        if (col < 9 && board[col + 1][i] !== '') return true;
-      }
-
-      // check top and bottom cells
-      if (row > 0 && board[row - 1][col] !== '') return true;
-      if (row < 9 && board[row + 1][col] !== '') return true;
-    }
-
-    return false;
+    return true;
   }
 
   const randomShipPlacement = () => {
@@ -95,48 +75,16 @@ const gameboard = () => {
       let row;
       let column;
       let orientation;
-      let flag;
-      function getRandom() {
+      while (true) {
         row = Math.floor(Math.random() * 10);
         column = Math.floor(Math.random() * 10);
-
         orientation = orientations[Math.floor(Math.random() * 2)];
-        if (orientation === 'horiz' && (column + object.length - 1) > 9) {
-          getRandom();
-        }
-        if (orientation === 'vert' && (row + object.length - 1) > 9) {
-          getRandom();
-        }
+        // check if off board
+        if (orientation === 'horiz' && (column + object.length - 1) > 9) continue;
+        if (orientation === 'vert' && (row + object.length - 1) > 9) continue;
 
-        if (hasAdjacentShips(object, row, column, orientation)) {
-          getRandom();
-        }
-        // false = no ship
-        flag = false;
-        if (orientation === 'horiz') {
-          for (let i = column; i < column + object.length; i++) {
-            if (!flag) {
-              flag = (board[row][i] !== '');
-            }
-          }
-          if (flag) {
-            getRandom();
-          }
-        }
-
-        flag = false;
-        if (orientation === 'vert') {
-          for (let i = row; i < row + object.length; i++) {
-            if (!flag) {
-              flag = (board[i][column] !== '');
-            }
-          }
-          if (flag) {
-            getRandom();
-          }
-        }
+        if (board[row][column] === '' && (noAdjacentShips(object, row, column, orientation))) break;
       }
-      getRandom();
 
       placeShip(object, row, column, orientation);
     });
