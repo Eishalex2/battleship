@@ -21,7 +21,7 @@ container.
 6 things remaining:
 - (done) git Add a key (X = miss, O = hit)
 - (done) Ships remaining capability
-- Make it so that ships cannot be placed next to or adjacent from each
+- (done) Make it so that ships cannot be placed next to or adjacent from each
   other
 - Add a custom message when placing each ship (Place your destroyer, etc.)
 - Improve computer AI

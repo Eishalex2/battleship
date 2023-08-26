@@ -104,15 +104,24 @@ export default class Listeners {
   }
 
   static isLegalShipPlacement(length, row, column) {
+    row = Number(row);
+    column = Number(column);
     // check if ship goes out of bounds
     if (this.orientation === 'horiz') {
       // check if ship goes out of bounds
-      if (Number(column) + length - 1 > 9) return false;
+      if (column + length - 1 > 9) return false;
       
+      // check adjacent cells
+      if (column > 0 && UI.containsShip(row, column - 1)) return false;
+      for (let i = 0; i < length; i++) {
+        if (row > 0 && UI.containsShip(row - 1, column + i)) return false;
+        if (row < 9 && UI.containsShip(row + 1, column + i)) return false;
+      }
+      if ((column + length) < 10 && UI.containsShip(row, column + length)) return false;
       // check if any of the target cells already has a ship in it
       // false = no ship
       let flag = false;
-      for (let i = Number(column); i < Number(column) + length; i++) {
+      for (let i = column; i < column + length; i++) {
         if (!flag) {
           flag = UI.containsShip(row, i);
         }
@@ -121,18 +130,27 @@ export default class Listeners {
     }
 
     if (this.orientation === 'vert') {
-      if (Number(row) + length - 1 > 9) return false;
+      // check if ship goes out of bounds
+      if (row + length - 1 > 9) return false;
 
+      // check adjacent cells
+      if (row > 0 && UI.containsShip(row - 1, column)) return false;
+      for (let i = 0; i < length; i++) {
+        if (column > 0 && UI.containsShip(row + i, column - 1)) return false;
+        if (column < 9 && UI.containsShip(row + i, column + 1)) return false;
+      }
+      if ((row + length) < 10 && UI.containsShip(row + length, column)) return false;
+
+      // check if any of the target cells already has a ship in it
       let flag = false;
-      for (let i = Number(row); i < Number(row) + length; i++) {
+      for (let i = row; i < row + length; i++) {
         if (!flag) {
           flag = UI.containsShip(i, column);
         }
       }
       return (!flag);
     }
-
-
+    return true;
   }
 
   static rotateShip() {
