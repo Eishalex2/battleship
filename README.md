@@ -1,30 +1,20 @@
-# battleship
+# Battleship
+A single-player classic battleship game where the player tries to sink all of the opponent's ships first
 
-// game loop (done)
-// game ends function (done)
-// how to place the ships git pushon the board (done)
-// improve computer ai guessing (somehow store the previous two guesses,
-could have it be a queue)
-// improve visuals
-// Add game ends visuals
-// Add new game functionality (done, but may need to mess with the
-z-index of the popup, or just set it to display none, and ditch the animation)
-// Add remaining ships visuals
-// Recheck and revise tests
+## Link
+https://eishalex2.github.io/battleship/
 
-Ideas: winner popup (do this). Look at EmptyBox's board (https://emptybox12.github.io/battleship/). Misses should
-be blue for water.
+## Built With
+This project was built using the principles of Test-Driven Development (TDD), along with the following languages and tools
 
-When you're placing the ships, have the ships names on the place board
-container.
+- JavaScript
+- HTML, CSS
+- Webpack
+- Jest
 
-6 things remaining:
-- (done) git Add a key (X = miss, O = hit)
-- (done) Ships remaining capability
-- (done) Make it so that ships cannot be placed next to or adjacent from each
-  other
-- (done) Add a custom message when placing each ship (Place your destroyer, etc.)
-- (not doing this) Improve computer AI
-- Recheck and revise tests
+## Features
+- Interactive browser-based experience
+- Shows a countdown of ships to better keep track of who is winning
 
-Bugs:
+## To Improve
+- Make the computer AI "smarter" instead of just attacking random squares
